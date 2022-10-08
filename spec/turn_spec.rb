@@ -45,4 +45,10 @@ RSpec.describe Turn do
     expect(turn.type).to eq(:basic)
   end
 
+  it 'displays winner of the turn' do
+    turn = Turn.new(@player1, @player2)
+
+    expect(turn.winner).to eq(@player1)
+  end
+
 end
