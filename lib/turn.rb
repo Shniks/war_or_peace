@@ -12,7 +12,7 @@ class Turn
     return :basic if basic == true
     return :war if war == true
     return :mutually_assured_destruction if war == true && second_index == true
-  end 
+  end
 
   def basic
     player1.deck.rank_of_card(0) != player2.deck.rank_of_card(0)
@@ -24,6 +24,10 @@ class Turn
 
   def second_index
     player1.deck.rank_of_card(2) == player2.deck.rank_of_card(2)
+  end
+
+  def winner
+    return player1 if basic == true 
   end
 
 end
