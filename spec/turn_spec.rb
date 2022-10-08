@@ -71,7 +71,7 @@ RSpec.describe Turn do
     expect(@player2.deck.cards).to eq([@card4, @card6, @card7])
   end
 
-  it 'displays a war type of turn' do
+  it 'can account for a war type of turn' do
     deck1 = Deck.new([@card1, @card2, @card5, @card8])
     deck2 = Deck.new([@card4, @card3, @card6, @card7])
     player1 = Player.new("Megan", deck1)
@@ -79,6 +79,19 @@ RSpec.describe Turn do
     turn = Turn.new(player1, player2)
 
     expect(turn.type).to eq(:war)
+
+    winner = turn.winner
+    turn.pile_cards
+
+    expect(turn.spoils_of_war.count).to eq(6)
+    expect(turn.spoils_of_war).to eq([@card1, @card2, @card5, @card4, @card3, @card6])
+
+    turn.award_spoils(winner)
+
+    expect(player1.deck.cards.count).to eq(1)
+    expect(player1.deck.cards).to eq([@card8])
+    expect(player2.deck.cards.count).to eq(7)
+    expect(player2.deck.cards).to eq([@card7, @card1, @card2, @card5, @card4, @card3, @card6])
   end
-  
+
 end
