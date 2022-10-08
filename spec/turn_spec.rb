@@ -32,4 +32,10 @@ RSpec.describe Turn do
     expect(turn.player2).to eq(@player2)
   end
 
+  it 'has a spoils of war array' do
+    turn = Turn.new(@player1, @player2)
+
+    expect(turn.spoils_of_war).to be_a(Array)
+  end 
+
 end
