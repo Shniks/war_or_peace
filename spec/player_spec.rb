@@ -15,4 +15,11 @@ RSpec.describe Player do
     expect(player).to be_a(Player)
   end
 
+  it 'has attributes' do
+    player = Player.new('Clarisa', @deck)
+
+    expect(player.name).to eq('Clarisa')
+    expect(player.deck).to eq(@deck)
+  end
+
 end
