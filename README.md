@@ -68,7 +68,7 @@ Use the interaction pattern below to help you build your Deck test and Deck clas
 Remember, ```#<Card:0x00randomletters&nums...>``` means “A Card Object” or “An Instance of the Card Class”. If you need to verify which card object it is, you can refer to the last few digits of the ‘random’ letters and numbers and match those to a card that is created near the top of the interaction pattern.
 
 ```ruby
-ry(main)> require './lib/card'
+pry(main)> require './lib/card'
 #=> true
 
 pry(main)> require './lib/deck'
@@ -201,11 +201,11 @@ The ```Turn``` is responsible for much of the logic of the game and will respond
 
 - ```initialize```: A Turn is created with two players - player1 and player2
 - readable attributes for ```player1```, ```player2```, and ```spoils_of_war```
-- ```type```: a turn is ```:basic```, ```:war```, or ```:mutually_assured_destruction```.
+- ```type```: a turn is ```:basic```, ```:war```, or ```:mutually_assured_destruction```
  - A ```:basic``` turn is one in which the ```rank_of_card_at(0)``` from the players’ decks are not the same rank.
  - A ```:war``` turn occurs when both players’ ```rank_of_card_at(0)``` are the same.
  - ```:mutually_assured_destruction``` occurs when both players’ ```rank_of_card_at(0)``` AND ```rank_of_card_at(2)``` are the same.
-- ```winner```: this method will determine the winner of the turn.
+- ```winner```: this method will determine the winner of the turn
  - if the turn has a type of ```:basic```, it will return whichever ```player``` has a higher ```rank_of_card_at(0)```
  - if the turn has a type of ```:war``` the winner will be whichever ```player``` has a higher ```rank_of_card_at(2)```
  - if the turn has a type of ```:mutually_assured_destruction``` the method will return ```No Winner```.
