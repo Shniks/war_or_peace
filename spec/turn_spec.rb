@@ -45,6 +45,16 @@ RSpec.describe Turn do
     expect(turn.type).to eq(:basic)
   end
 
+  it 'displays a basic type of turn for a different player' do
+    deck1 = Deck.new([@card1, @card2, @card5, @card8])
+    deck2 = Deck.new([@card3, @card4, @card6, @card7])
+    player1 = Player.new("Megan", deck2)
+    player2 = Player.new("Aurora", deck1)
+    turn = Turn.new(player1, player2)
+
+    expect(turn.winner).to eq(player2)
+  end
+
   it 'displays winner of the turn' do
     turn = Turn.new(@player1, @player2)
 
