@@ -25,4 +25,11 @@ RSpec.describe Turn do
     expect(turn).to be_a(Turn)
   end
 
+  it 'has attributes' do
+    turn = Turn.new(@player1, @player2)
+
+    expect(turn.player1).to eq(@player1)
+    expect(turn.player2).to eq(@player2)
+  end
+
 end
