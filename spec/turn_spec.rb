@@ -94,4 +94,24 @@ RSpec.describe Turn do
     expect(player2.deck.cards).to eq([@card7, @card1, @card2, @card5, @card4, @card3, @card6])
   end
 
+  it 'can account for a mutually assured destruction type of turn' do
+    card6 = Card.new(:diamond, '8', 8)
+    deck1 = Deck.new([@card1, @card2, @card5, @card8])
+    deck2 = Deck.new([@card4, @card3, card6, @card7])
+    player1 = Player.new("Megan", deck1)
+    player2 = Player.new("Aurora", deck2)
+    turn = Turn.new(player1, player2)
+
+    expect(turn.type).to eq(:mutually_assured_destruction)
+
+    winner = turn.winner
+    turn.pile_cards
+
+    expect(turn.spoils_of_war).to eq([])
+    expect(player1.deck.cards.count).to eq(1)
+    expect(player1.deck.cards).to eq([@card8])
+    expect(player2.deck.cards.count).to eq(1)
+    expect(player2.deck.cards).to eq([@card7])
+  end
+
 end
