@@ -24,4 +24,12 @@ RSpec.describe Deck do
     expect(deck.cards).to eq(@cards)
   end
 
+  it 'displays rank of cards' do
+    deck = Deck.new(@cards)
+
+    expect(deck.rank_of_card(0)).to eq(12)
+    expect(deck.rank_of_card(1)).to eq(3)
+    expect(deck.rank_of_card(2)).to eq(14)
+  end
+
 end
