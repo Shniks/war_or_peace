@@ -11,7 +11,7 @@ class Turn
 
   def type
     return :basic if basic == true
-    return :war if war == true
+    return :war if war == true && second_index != true
     return :mutually_assured_destruction if war == true && second_index == true
   end
 
@@ -29,7 +29,8 @@ class Turn
 
   def winner
     return winner_basic if basic == true
-    return winner_war if war == true
+    return winner_war if type == :war
+    return 'No Winner' if type == :mutually_assured_destruction
   end
 
   def winner_basic
@@ -44,20 +45,26 @@ class Turn
 
   def pile_cards
     case
-      when basic == true
+      when type == :basic
         spoils_of_war << player1.deck.cards[0]
         spoils_of_war << player2.deck.cards[0]
         player1.deck.remove_card
         player2.deck.remove_card
-      when war == true
+      when type == :war
         spoils_of_war << player1.deck.cards[0..2]
         spoils_of_war << player2.deck.cards[0..2]
-        3.times do
-          player1.deck.remove_card
-          player2.deck.remove_card
-        end
+        remove_three_cards(player1, player2)
         spoils_of_war.flatten!
-      end
+      when type == :mutually_assured_destruction
+        remove_three_cards(player1, player2)
+    end
+  end
+
+  def remove_three_cards(player1, player2)
+    3.times do
+      player1.deck.remove_card
+      player2.deck.remove_card
+    end
   end
 
   def award_spoils(winner)
