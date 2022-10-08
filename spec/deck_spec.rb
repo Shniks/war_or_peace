@@ -1,6 +1,5 @@
 require 'rspec'
 require './lib/deck'
-require 'pry'
 
 RSpec.describe Deck do
   before do
@@ -37,6 +36,12 @@ RSpec.describe Deck do
 
     expect(deck.high_ranking_cards).to eq([@card1, @card3])
     expect(deck.high_ranking_cards).to be_a(Array)
+  end
+
+  it 'provides percent high ranking cards' do
+    deck = Deck.new(@cards)
+
+    expect(deck.percent_high_ranking).to eq(66.67)
   end
 
 end
