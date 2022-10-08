@@ -51,4 +51,12 @@ RSpec.describe Turn do
     expect(turn.winner).to eq(@player1)
   end
 
+  it 'can send cards to spoils of war after each turn' do
+    turn = Turn.new(@player1, @player2)
+    turn.pile_cards
+
+    expect(turn.spoils_of_war.count).to eq(2)
+    expect(turn.spoils_of_war).to eq([@card1, @card3])
+  end
+
 end
