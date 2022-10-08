@@ -1,3 +1,4 @@
+require 'pry'
 class Turn
 
   attr_reader :player1, :player2, :spoils_of_war
@@ -27,7 +28,11 @@ class Turn
   end
 
   def winner
-    return player1 if basic == true
+    return winner_basic if basic == true
+  end
+
+  def winner_basic
+    return player1 if player1.deck.rank_of_card(0) > player2.deck.rank_of_card(0)
     player2
   end
 
@@ -36,7 +41,16 @@ class Turn
       when basic == true
         spoils_of_war << player1.deck.cards[0]
         spoils_of_war << player2.deck.cards[0]
+        player1.deck.remove_card
+        player2.deck.remove_card
       end
+  end
+
+  def award_spoils(winner)
+    spoils_of_war.each do |card|
+      winner.deck.cards << card
+    end
+    spoils_of_war.clear
   end
 
 end
