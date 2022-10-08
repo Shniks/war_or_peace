@@ -4,10 +4,10 @@ require 'pry'
 
 RSpec.describe Deck do
   before do
-    card1 = Card.new(:diamond, 'Queen', 12)
-    card2 = Card.new(:spade, '3', 3)
-    card3 = Card.new(:heart, 'Ace', 14)
-    @cards = [card1, card2, card3]
+    @card1 = Card.new(:diamond, 'Queen', 12)
+    @card2 = Card.new(:spade, '3', 3)
+    @card3 = Card.new(:heart, 'Ace', 14)
+    @cards = [@card1, @card2, @card3]
   end
 
   it 'exists' do
@@ -30,6 +30,13 @@ RSpec.describe Deck do
     expect(deck.rank_of_card(0)).to eq(12)
     expect(deck.rank_of_card(1)).to eq(3)
     expect(deck.rank_of_card(2)).to eq(14)
+  end
+
+  it 'provides high ranking cards' do
+    deck = Deck.new(@cards)
+
+    expect(deck.high_ranking_cards).to eq([@card1, @card3])
+    expect(deck.high_ranking_cards).to be_a(Array)
   end
 
 end
