@@ -29,10 +29,16 @@ class Turn
 
   def winner
     return winner_basic if basic == true
+    return winner_war if war == true
   end
 
   def winner_basic
     return player1 if player1.deck.rank_of_card(0) > player2.deck.rank_of_card(0)
+    player2
+  end
+
+  def winner_war
+    return player1 if player1.deck.rank_of_card(2) > player2.deck.rank_of_card(2)
     player2
   end
 
@@ -43,6 +49,14 @@ class Turn
         spoils_of_war << player2.deck.cards[0]
         player1.deck.remove_card
         player2.deck.remove_card
+      when war == true
+        spoils_of_war << player1.deck.cards[0..2]
+        spoils_of_war << player2.deck.cards[0..2]
+        3.times do
+          player1.deck.remove_card
+          player2.deck.remove_card
+        end
+        spoils_of_war.flatten!
       end
   end
 
