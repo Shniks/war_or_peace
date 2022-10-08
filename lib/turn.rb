@@ -27,7 +27,16 @@ class Turn
   end
 
   def winner
-    return player1 if basic == true 
+    return player1 if basic == true
+    player2
+  end
+
+  def pile_cards
+    case
+      when basic == true
+        spoils_of_war << player1.deck.cards[0]
+        spoils_of_war << player2.deck.cards[0]
+      end
   end
 
 end
